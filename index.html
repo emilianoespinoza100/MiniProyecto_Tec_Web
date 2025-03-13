@@ -3,636 +3,86 @@
 <head>
     <meta charset="UTF-8" />
     <title>Fútbol Retro Aventura</title>
-
-    <!-- Incluyendo Font Awesome para los íconos -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="css/estilos.css">
     <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
-    <style type="text/css">
-        body {
-            margin: 0;
-            font-family: 'Press Start 2P', cursive;
-            background-image: url('assets/fondo.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            position: relative;
-        }
-
-        #menu {
-            display: block;
-            animation: slideDown 0.5s ease-in-out;
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-gap: 20px;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            width: 450px;
-        }
-
-        #menu h1 {
-            font-size: 40px;
-            margin-bottom: 20px;
-            color: #f39c12;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-weight: bold;
-        }
-
-        .menu-button {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 24px;
-            padding: 15px;
-            background: #f39c12;
-            color: black;
-            border: 3px solid #f39c12;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: transform 0.2s ease, background 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transform: skewY(-20deg);
-        }
-
-        .menu-button:hover {
-            background: #000000;
-            color: #f39c12;
-            border-color: #f39c12;
-            transform: skewY(-20deg) scale(1.05);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .menu-button:active {
-            transform: skewY(-20deg) scale(0.98);
-        }
-
-        .menu-button i {
-            font-size: 32px;
-        }
-
-        canvas {
-            border: 4px solid #f39c12;
-            border-radius: 10px;
-        }
-
-        #levelCompleteMessage {
-            display: none;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            background-color: rgba(0, 0, 0, 0.9);
-            color: white;
-            padding: 40px;
-            border-radius: 12px;
-            z-index: 20;
-            width: 450px;
-            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.6);
-            animation: slideIn 0.5s ease-in-out;
-        }
-
-        #levelCompleteMessage h2 {
-            margin: 0 0 10px 0;
-            font-size: 32px;
-            color: #f39c12;
-        }
-
-        #levelCompleteMessage p {
-            margin: 0 0 20px 0;
-            font-size: 20px;
-        }
-
-        #levelCompleteMessage button {
-            font-size: 18px;
-            padding: 12px 24px;
-            background-color: #2980b9;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        #levelCompleteMessage button:hover {
-            background-color: #f39c12;
-        }
-
-        .music-icons {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            gap: 15px;
-            background-color: rgba(128, 128, 128, 0.6);
-            padding: 10px;
-            border-radius: 8px;
-        }
-
-        .music-icons i {
-            font-size: 40px;
-            cursor: pointer;
-            color: white;
-            transition: transform 0.2s ease, color 0.3s ease;
-        }
-
-        .music-icons i:hover {
-            color: #f39c12;
-            transform: scale(1.2);
-        }
-
-        .music-icons i:active {
-            transform: scale(1.1);
-        }
-
-        /* Estilo del formulario de registro */
-        #registerForm {
-            display: none;
-    animation: slideUp 0.5s ease-in-out;
-            display: none;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            width: 300px;
-        }
-
-        #registerForm input {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 18px;
-            padding: 10px;
-            margin: 10px 0;
-            width: 100%;
-            background: #fff;
-            color: black;
-            border: 2px solid #f39c12;
-            border-radius: 6px;
-        }
-
-        #registerForm button {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 18px;
-            padding: 10px 20px;
-            background: #f39c12;
-            color: black;
-            border: 2px solid #f39c12;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: transform 0.2s ease, background 0.3s ease;
-        }
-
-        #registerForm button:hover {
-            background: #000;
-            color: #f39c12;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translate(-50%, -60%);
-            }
-            to {
-                transform: translate(-50%, -50%);
-            }
-        }
-        /* Deslizamiento hacia arriba */
-@keyframes slideUp {
-    from {
-        transform: translateY(100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-/* Deslizamiento hacia abajo */
-@keyframes slideDown {
-    from {
-        transform: translateY(-100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+    <!-- Pantalla de presentación -->
+    <div id="pantallaPresentacion">
+        <div class="contenidoPantalla">
+            <img id="logoJuego" src="assets/logo.png" alt="Logo">
+            <h1>Fútbolito Retro </h1>
+            <center>
+            <button class="botonMenu" onclick="iniciarJuego()">Comenzar</button>
+        </center>
+        </div>
+    </div>
 
-<!-- Menú -->
-<div id="menu">
-    <h1>Fútbol Retro</h1>
-    <button class="menu-button" onclick="startGame()"><i class="fas fa-play"></i> Jugar</button>
-    <button class="menu-button" onclick="showRecords()"><i class="fas fa-trophy"></i> Récords</button>
-    <button class="menu-button" onclick="showHelp()"><i class="fas fa-question-circle"></i> Ayuda</button>
-    <button class="menu-button" onclick="exitGame()"><i class="fas fa-times"></i> Salir</button>
-</div>
+    <!-- Menú -->
+    <div id="menu" style="display: none;">
+        <h1>MENU</h1>
+        <br>
+        <center>
+            <div class="menu-container">
+                <button class="menu-button" onclick="startGame()"><i class="fas fa-play"></i> Play</button>
+                <button class="menu-button" onclick="showRecords()"><i class="fas fa-trophy"></i> Record</button>
+                <button class="menu-button" onclick="showHelp()"><i class="fas fa-question-circle"></i> Instructions</button>
+                <button class="menu-button" onclick="exitGame()"><i class="fas fa-times"></i> Credit</button>
+            </div>
+        </center>
+    </div>
 
-<!-- Formulario de registro -->
-<div id="registerForm">
-    <h2>Registro</h2>
-    <input type="text" id="username" placeholder="Nombre de usuario" />
-    <input type="password" id="password" placeholder="Contraseña" />
-    <button onclick="registerUser()">Registrar</button>
-</div>
+    <!-- Captura de alias -->
+    <div id="capturaAlias" style="display: none;">
+        <h2>Ingresa tu alias</h2>
+        <input type="text" id="username" placeholder="Alias (4-8 caracteres, solo letras, números y _)" />
+        <button onclick="validarAlias()">Continuar</button>
+    </div>
 
-<!-- Mensaje de nivel completado -->
-<div id="levelCompleteMessage">
-    <h2>¡Felicidades!</h2>
-    <p>Has superado el nivel 1. ¡Sigue así!</p>
-    <button onclick="nextLevel()">Continuar al siguiente nivel</button>
-</div>
+    <!-- Formulario de registro -->
+    <div id="registerForm" style="display: none;">
+        <h2>Registro</h2>
+        <input type="text" id="username" placeholder="Nombre de usuario" />
+        <button onclick="registerUser()">Registrar</button>
+    </div>
 
-<!-- Controles de música -->
-<div class="music-icons">
-    <i class="fas fa-volume-up" onclick="toggleMusic()"></i>
-    <i class="fas fa-volume-mute" onclick="stopMusic()"></i>
-</div>
-<!-- Modal de los récords -->
-<div id="records" style="display: none;">
-    <h2>Récords</h2>
-    <table style="width: 100%; border-collapse: collapse; text-align: left;">
-        <thead>
-            <tr>
-                <th style="padding: 10px; border: 1px solid #f39c12; background-color: #f39c12; color: white;">Usuario</th>
-                <th style="padding: 10px; border: 1px solid #f39c12; background-color: #f39c12; color: white;">Puntaje</th>
-            </tr>
-        </thead>
-        <tbody id="recordsTableBody">
-            <!-- Los registros serán insertados aquí dinámicamente -->
-        </tbody>
-    </table>
-    <button class="menu-button" onclick="backToMenu()">Volver al Menú</button>
-</div>
-<script type="text/javascript">
-    var music;
-    var isMusicPlaying = false;
-    var username = '';
-    var password = '';
+    <!-- Mensaje de nivel completado -->
+    <div id="levelCompleteMessage" style="display: none;">
+        <h2>¡Felicidades!</h2>
+        <p>Has superado el nivel 1. ¡Sigue así!</p>
+        <button onclick="nextLevel()">Continuar al siguiente nivel</button>
+    </div>
 
-    // Función para reproducir/pausar música
-    function toggleMusic() {
-        if (isMusicPlaying) {
-            music.pause();
-        } else {
-            music = new Audio('assets/Samba do Brasil (Radio Remix).mp3');
-            music.loop = true;
-            music.play();
-        }
-        isMusicPlaying = !isMusicPlaying;
-    }
+    <!-- Controles de música -->
+    <div class="music-icons">
+        <i class="fas fa-volume-up" onclick="toggleMusic()"></i>
+        <i class="fas fa-volume-mute" onclick="stopMusic()"></i>
+    </div>
 
-    // Función para detener la música
-    function stopMusic() {
-        if (music) {
-            music.pause();
-            isMusicPlaying = false;
-        }
-    }
+    <!-- Modal de los récords -->
+    <div id="records" style="display: none;">
+        <h2>Récords</h2>
+        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <thead>
+                <tr>
+                    <th style="padding: 10px; border: 1px solid #f39c12; background-color: #f39c12; color: white;">Usuario</th>
+                    <th style="padding: 10px; border: 1px solid #f39c12; background-color: #f39c12; color: white;">Puntaje</th>
+                </tr>
+            </thead>
+            <tbody id="recordsTableBody">
+                <!-- Los registros serán insertados aquí dinámicamente -->
+            </tbody>
+        </table>
+        <button class="menu-button" onclick="backToMenu()">Volver al Menú</button>
+    </div>
 
-    // Mostrar el formulario de registro
-    function startGame() {
-        document.getElementById('menu').style.display = 'none';
-        document.getElementById('registerForm').style.display = 'block';
-    }
-
-    // Función de registro de usuario
-    function registerUser() {
-        username = document.getElementById('username').value;
-        password = document.getElementById('password').value;
-
-        if (username && password) {
-            localStorage.setItem('username', username);
-            localStorage.setItem('password', password);
-            document.getElementById('registerForm').style.display = 'none';
-            startGameInternal();
-        } else {
-            alert('Por favor, ingrese un nombre de usuario y contraseña');
-        }
-    }
-    // Función para mostrar los récords guardados en localStorage
-function showRecords() {
-    document.getElementById('menu').style.display = 'none';
-    const recordsDiv = document.getElementById('records');
-    recordsDiv.style.display = 'block';
-
-    const records = JSON.parse(localStorage.getItem('records')) || [];
-    const recordsTableBody = document.getElementById('recordsTableBody');
-    recordsTableBody.innerHTML = ''; // Limpiar cualquier contenido previo
-
-    records.forEach(record => {
-        const row = document.createElement('tr');
-        const usernameCell = document.createElement('td');
-        usernameCell.textContent = record.username;
-        usernameCell.style.padding = '10px';
-        usernameCell.style.border = '1px solid #f39c12';
-
-        const scoreCell = document.createElement('td');
-        scoreCell.textContent = record.score;
-        scoreCell.style.padding = '10px';
-        scoreCell.style.border = '1px solid #f39c12';
-
-        row.appendChild(usernameCell);
-        row.appendChild(scoreCell);
-        recordsTableBody.appendChild(row);
-    });
-}
-// Función para actualizar los registros en el localStorage
-function updateRecords(score) {
-    const username = localStorage.getItem('username');
-    let records = JSON.parse(localStorage.getItem('records')) || [];
-    records.push({ username, score });
-    records.sort((a, b) => b.score - a.score);  // Ordenar por puntaje descendente
-    localStorage.setItem('records', JSON.stringify(records));
-}
-
-// Función para volver al menú principal
-function backToMenu() {
-    document.getElementById('records').style.display = 'none';
-    document.getElementById('menu').style.display = 'block';
-}
-
-    // Función para empezar el juego
-function startGame() {
-    // Aplicar fade-out al menú
-    document.getElementById('menu').classList.add('fade-out');
-    
-    // Esperar el fin de la animación de desvanecimiento antes de cambiar de pantalla
-    setTimeout(function() {
-        document.getElementById('menu').style.display = 'none';
-        document.getElementById('registerForm').style.display = 'block';
-        document.getElementById('registerForm').classList.add('fade-in');  // Aplicar fade-in al formulario
-    }, 500);  // Espera 500ms antes de cambiar de pantalla
-}
-
-// Función para salir del juego
-function exitGame() {
-    if (confirm("¿Estás seguro que quieres salir del juego?")) {
-        document.getElementById('menu').classList.add('fade-out');  // Aplica fade-out al menú
-        
-        // Esperar la animación de desvanecimiento y luego cerrar la ventana
-        setTimeout(function() {
-            window.close();
-        }, 500);
-    }
-}
-
-// Función para mostrar la pantalla de registros
-function showRecords() {
-    // Aplica un desvanecimiento en la transición entre pantallas
-    document.getElementById('menu').classList.add('fade-out');
-    
-    setTimeout(function() {
-        document.getElementById('menu').style.display = 'none';
-        document.getElementById('registerForm').style.display = 'block';
-        document.getElementById('registerForm').classList.add('fade-in');
-    }, 500);
-}
-
-// Función para mostrar el mensaje de nivel completo
-function nextLevel() {
-    levelCompleteMessage.style.display = 'none';
-    gameOver = false;
-
-    // Desvanecer el mensaje de nivel completado
-    levelCompleteMessage.classList.add('fade-out');
-    setTimeout(function() {
-        levelCompleteMessage.style.display = 'none';
-        scoreText.setText('Puntaje: ' + score);
-        levelText.setText('Nivel: ' + level);
-    }, 500); // Esperar 500ms antes de cambiar el contenido
-}
-
-
-    // Función para iniciar el juego (después de registro)
-    function startGameInternal() {
-        menuDiv.style.display = 'none';
-        game = new Phaser.Game(config);
-    }
-
-    // Mostrar récords (los registros guardados en localStorage)
-    function showRecords() {
-        const records = JSON.parse(localStorage.getItem('records')) || [];
-        let recordTable = 'Nombre de Usuario | Puntaje\n';
-        records.forEach(record => {
-            recordTable += `${record.username} | ${record.score}\n`;
-        });
-        alert(recordTable);
-    }
-
-    // Función para mostrar ayuda
-    function showHelp() {
-        alert("Instrucciones del juego:\n- Usa las flechas para mover al jugador.\n- Recoge estrellas para sumar puntos.\n- Evita las bombas para no perder el juego.");
-    }
-
-    // Función para salir del juego
-    function exitGame() {
-        if (confirm("¿Estás seguro que quieres salir del juego?")) {
-            window.close();
-        }
-    }
-
-    // Actualizar la tabla de récords después de completar un nivel
-    function updateRecords(score) {
-        const username = localStorage.getItem('username');
-        let records = JSON.parse(localStorage.getItem('records')) || [];
-        records.push({ username, score });
-        records.sort((a, b) => b.score - a.score);  // Ordenar por puntaje descendente
-        localStorage.setItem('records', JSON.stringify(records));
-    }
-
-    // Función cuando el jugador toca una bomba
-    function hitBomb(player, bomb) {
-        this.physics.pause();
-        player.setTint(0xff0000);
-        player.anims.play('turn');
-        gameOver = true;
-        levelText.setText('Game Over! Level: ' + level);
-        updateRecords(score);  // Actualizar récords al finalizar el juego
-    }
-    
-   // Configuración del juego Phaser
-var config = {
-    type: Phaser.AUTO,
-    width: 800,
-    height: 600,
-    physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: { y: 300 },
-            debug: false
-        }
-    },
-    scene: {
-        preload: preload,
-        create: create,
-        update: update
-    }
-};
-
-// Variables del juego
-var player;
-var stars;
-var bombs;
-var platforms;
-var cursors;
-var score = 0;
-var gameOver = false;
-var scoreText;
-var level = 1; 
-var levelText; 
-var levelCompleteMessage = document.getElementById('levelCompleteMessage');
-var menuDiv = document.getElementById('menu');
-var game;
-
-// Función preload (cargar recursos)
-function preload() {
-    this.load.image('sky', 'assets/sky.png');
-    this.load.image('ground', 'assets/platform.png');
-    this.load.image('star', 'assets/star.png');
-    this.load.image('bomb', 'assets/bomb.png');
-    this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
-}
-
-// Función create (configurar la escena)
-function create() {
-    this.add.image(400, 300, 'sky');
-
-    // Crear plataformas
-    platforms = this.physics.add.staticGroup();
-    platforms.create(400, 568, 'ground').setScale(2).refreshBody();
-    platforms.create(600, 400, 'ground');
-    platforms.create(50, 250, 'ground');
-    platforms.create(750, 220, 'ground');
-
-    // Crear jugador
-    player = this.physics.add.sprite(100, 450, 'dude');
-    player.setBounce(0.2);
-    player.setCollideWorldBounds(true);
-
-    // Animaciones del jugador
-    this.anims.create({
-        key: 'left',
-        frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
-        frameRate: 10,
-        repeat: -1
-    });
-
-    this.anims.create({
-        key: 'turn',
-        frames: [{ key: 'dude', frame: 4 }],
-        frameRate: 20
-    });
-
-    this.anims.create({
-        key: 'right',
-        frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
-        frameRate: 10,
-        repeat: -1
-    });
-
-    cursors = this.input.keyboard.createCursorKeys();
-
-    // Crear estrellas
-    stars = this.physics.add.group({
-        key: 'star',
-        repeat: 11,
-        setXY: { x: 12, y: 0, stepX: 70 }
-    });
-
-    stars.children.iterate(function(star) {
-        star.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-    });
-
-    // Crear bombas
-    bombs = this.physics.add.group();
-
-    // Colisiones
-    this.physics.add.collider(player, platforms);
-    this.physics.add.collider(stars, platforms);
-    this.physics.add.collider(bombs, platforms);
-    this.physics.add.overlap(player, stars, collectStar, null, this);
-    this.physics.add.collider(player, bombs, hitBomb, null, this);
-
-    // Texto de puntaje
-    scoreText = this.add.text(16, 16, 'Puntaje: 0', { fontSize: '32px', fill: '#000' });
-    levelText = this.add.text(16, 50, 'Nivel: 1', { fontSize: '32px', fill: '#000' });
-}
-
-// Función update (actualizar cada cuadro)
-function update() {
-    if (gameOver) {
-        return;
-    }
-
-    if (cursors.left.isDown) {
-        player.setVelocityX(-160);
-        player.anims.play('left', true);
-    } else if (cursors.right.isDown) {
-        player.setVelocityX(160);
-        player.anims.play('right', true);
-    } else {
-        player.setVelocityX(0);
-        player.anims.play('turn');
-    }
-
-    if (cursors.up.isDown && player.body.touching.down) {
-        player.setVelocityY(-330);
-    }
-}
-
-// Función para recolectar estrellas
-function collectStar(player, star) {
-    star.disableBody(true, true);
-
-    score += 10;
-    scoreText.setText('Puntaje: ' + score);
-
-    if (stars.countActive(true) === 0) {
-        stars.children.iterate(function(star) {
-            star.enableBody(true, star.x, 0, true, true);
-        });
-
-        // Crear una bomba nueva
-        var bomb = bombs.create(Phaser.Math.Between(50, 750), 0, 'bomb');
-        bomb.setBounce(1);
-        bomb.setCollideWorldBounds(true);
-        bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
-        
-        level++;  // Aumentar nivel
-        levelText.setText('Nivel: ' + level);
-
-        // Mostrar mensaje de nivel completo
-        levelCompleteMessage.style.display = 'block';
-    }
-}
-
-// Función para continuar al siguiente nivel
-function nextLevel() {
-    levelCompleteMessage.style.display = 'none';
-    scoreText.setText('Puntaje: ' + score);
-    levelText.setText('Nivel: ' + level);
-    gameOver = false;
-}
-</script>
+   
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/script.js"></script>
 
 </body>
 </html>
