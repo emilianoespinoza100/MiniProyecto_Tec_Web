@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <title>Fútbol Retro Aventura</title>
     <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/registro.css">
     <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -21,6 +22,38 @@
         </center>
         </div>
     </div>
+    <div id="creditsScreen" style="display: none;">
+        <div class="credits-content">
+            <h1>Créditos</h1>
+            <div class="team-member">
+                <img src="assets/emilianoespinoza.jpeg" alt="Miembro 1" class="member-image">
+                <div class="member-info">
+                    <h3>JEFE DEL EQUIPO DEL PROYECTO</h3>
+                    <p>Emiliano Jahir Espinoza Herrera Id:335362</p>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="assets/miguelrodriguez.jpeg" alt="Miembro 2" class="member-image">
+                <div class="member-info">
+                    <h3>INTEGRANTE NO 2</h3>
+                    <p>Miguel Ángel Rodríguez López Id:346012</p>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="assets/miguelflores.jpeg" alt="Miembro 3" class="member-image">
+                <div class="member-info">
+                    <h3>INTEGRANTE NO 3</h3>
+                    <p>Miguel Sebastian Valdivia Flores:337407</p>
+                </div>
+            </div>
+            <div class="materia-fecha">
+                <p><strong>Fecha:</strong> 15 de marzo 2025</p>
+            </div>
+        </div>
+       
+        <button class="menu-button" onclick="backToMenu()">Volver al Menú</button>
+       
+    </div>
 
     <!-- Menú -->
     <div id="menu" style="display: none;">
@@ -31,9 +64,32 @@
                 <button class="menu-button" onclick="startGame()"><i class="fas fa-play"></i> Play</button>
                 <button class="menu-button" onclick="showRecords()"><i class="fas fa-trophy"></i> Record</button>
                 <button class="menu-button" onclick="showHelp()"><i class="fas fa-question-circle"></i> Instructions</button>
-                <button class="menu-button" onclick="exitGame()"><i class="fas fa-times"></i> Credit</button>
+                <button class="menu-button" onclick="showCredits()"><i class="fas fa-times"></i> Créditos</button>
+
+
             </div>
         </center>
+    </div>
+
+    <!-- Selección de personaje -->
+    <div id="seleccionPersonaje" style="display: none;">
+        <h2>Elige tu personaje</h2>
+        <div class="personajes">
+            <!-- Jugador 1 -->
+            <div class="personaje" id="jugador1" draggable="true" ondragstart="drag(event)">
+                <img src="assets/personaje1frente.png" alt="Jugador 1">
+                <p>Jugador 1</p>
+            </div>
+            <!-- Jugador 2 -->
+            <div class="personaje" id="jugador2" draggable="true" ondragstart="drag(event)">
+                <img src="assets/personaje2frente.png" alt="Jugador 2">
+                <p>Jugador 2</p>
+            </div>
+        </div>
+        <!-- Área donde el personaje será soltado -->
+        <div id="areaDrop" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <p>Arrastra y suelta tu personaje aquí</p>
+        </div>
     </div>
 
     <!-- Captura de alias -->
@@ -63,26 +119,34 @@
         <i class="fas fa-volume-mute" onclick="stopMusic()"></i>
     </div>
 
-    <!-- Modal de los récords -->
-    <div id="records" style="display: none;">
-        <h2>Récords</h2>
-        <table style="width: 100%; border-collapse: collapse; text-align: left;">
-            <thead>
-                <tr>
-                    <th style="padding: 10px; border: 1px solid #f39c12; background-color: #f39c12; color: white;">Usuario</th>
-                    <th style="padding: 10px; border: 1px solid #f39c12; background-color: #f39c12; color: white;">Puntaje</th>
-                </tr>
-            </thead>
-            <tbody id="recordsTableBody">
-                <!-- Los registros serán insertados aquí dinámicamente -->
-            </tbody>
-        </table>
-        <button class="menu-button" onclick="backToMenu()">Volver al Menú</button>
-    </div>
+   <!-- Contenedor del juego -->
+   <div id="game-container" style="display: none;"></div>
 
-   
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="js/script.js"></script>
+<!-- Modal de los récords -->
+<div id="records" style="display: none;">
+    <h2>Récords</h2>
+    <table style="width: 100%; border-collapse: collapse; text-align: left;">
+        <thead>
+            <tr>
+                <th style="padding: 10px; border: 1px solid #f39c12; background-color: #f39c12; color: white;">Usuario</th>
+                <th style="padding: 10px; border: 1px solid #f39c12; background-color: #f39c12; color: white;">Puntaje</th>
+            </tr>
+        </thead>
+        <tbody id="recordsTableBody">
+            <!-- Los registros serán insertados aquí dinámicamente -->
+        </tbody>
+    </table>
+    <button class="menu-button" onclick="backToMenu()">Volver al Menú</button>
+</div>
 
+<!-- Pantalla de felicitación -->
+<div id="felicitacion" style="display: none;">
+    <h2>¡Felicidades, <span id="aliasGanador"></span>!</h2>
+    <p>Has completado todos los niveles.</p>
+    <button onclick="volverAlMenu()">Volver al menú</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="js/game.js"></script>
 </body>
 </html>

@@ -12,7 +12,7 @@ body {
     height: 100vh;
     position: relative;
 }
-/* Pantalla de presentación */
+/* Pantalla de presentaciÃ³n */
 #pantallaPresentacion {
     position: absolute;
     top: 0;
@@ -53,14 +53,14 @@ h1 {
     font-family: 'Press Start 2P', cursive; /* Usamos la fuente pixeleada */
     background-color: #f39c12; /* Color de fondo */
     color:000; /* Color del texto */
-    font-size: 20px; /* Tamaño de la fuente */
-    padding: 30px 30px; /* Espaciado dentro del botón (alto y ancho) */
+    font-size: 20px; /* TamaÃ±o de la fuente */
+    padding: 30px 30px; /* Espaciado dentro del botÃ³n (alto y ancho) */
     border: none; /* Sin borde */
     border-radius: 5px; /* Borde redondeado (opcional, puedes ajustarlo o eliminarlo) */
-    cursor: pointer; /* Cambia el cursor cuando pasa sobre el botón */
+    cursor: pointer; /* Cambia el cursor cuando pasa sobre el botÃ³n */
     text-align: center; /* Centra el texto */
-    display: inline-block; /* Para que el botón no ocupe todo el ancho */
-    transition: background-color 0.3s; /* Transición suave al pasar el mouse */
+    display: inline-block; /* Para que el botÃ³n no ocupe todo el ancho */
+    transition: background-color 0.3s; /* TransiciÃ³n suave al pasar el mouse */
 }
 
 .botonMenu:hover {
@@ -76,6 +76,121 @@ h1 {
 .botonMenu i {
     font-size: 32px;
 }
+
+.personajes {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+#seleccionPersonaje {
+    color: #f39c12;
+    text-align: center;
+}
+
+.personaje {
+    background: #f39c12;
+    border: 3px solid rgba(0, 0, 0, 0.9);
+    color: rgba(0, 0, 0, 0.9);
+    margin: 5px;
+    cursor: pointer;
+}
+
+#areaDrop {
+    border: 3px solid #f39c12;
+    padding: 20px;
+    margin-top: 30px;
+    background-color: rgba(0, 0, 0, 0.9);
+    width: 500px;
+    height: 200px;
+    empty-cells: show;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#areaDrop p {
+    padding: auto;
+    text-align: center;
+    color: #f39c12;
+    font-size: 18px;
+}
+
+#creditsScreen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+    color: #f39c12;
+    font-family: 'Press Start 2P', cursive;
+    padding: 20px;
+    border: 5px solid #f39c12;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 50px auto;
+    text-align: center;
+}
+.credits-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #f39c12;
+}
+.team-member {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #000;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #f39c12;
+}
+.member-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+    border: 3px solid #f39c12;
+}
+.member-info h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: #f39c12;
+}
+.member-info p {
+    font-size: 1rem;
+    color: #ecf0f1;
+}
+.materia-fecha {
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #ecf0f1;
+}
+.materia-fecha strong {
+    color: #f39c12;
+}
+.menu-button {
+    background-color: #f39c12;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+.menu-button:hover {
+    background-color: #e67e22;
+}
+
+button:hover {
+    background-color: #000;
+}
+
+button:focus {
+    outline: none;
+}
+
 
 /* Estilo para el contenedor del formulario de alias */
 #capturaAlias {
@@ -153,7 +268,7 @@ h1 {
     transform: scale(0.98);
 }
 
-/* Animación para el formulario de alias */
+/* AnimaciÃ³n para el formulario de alias */
 @keyframes slideIn {
     from {
         transform: translate(-50%, -60%);
@@ -164,7 +279,7 @@ h1 {
         opacity: 1;
     }
 }
-/* Animación para la pantalla de presentación */
+/* AnimaciÃ³n para la pantalla de presentaciÃ³n */
 @keyframes desvanecer {
     from {
         opacity: 0;
